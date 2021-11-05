@@ -24,13 +24,12 @@ export class Serpent {
     public draw(gfx: Gfx) {
         gfx.drawHead(this.pos.x, this.pos.y, this.angle);
 
-        for (let i = 0; i < this.trailSegments.length; i += 10) {
+        for (let i = this.trailSegments.length - 1; i > 0; i -= 10) {
             let segment = this.trailSegments[i];
             gfx.drawHead(segment.x, segment.y, 0);
         }
 
-
-
+        // Pop the first element
         if (this.trailSegments.length > 200) {
             this.trailSegments.shift();
         }
