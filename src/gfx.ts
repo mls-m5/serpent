@@ -11,7 +11,10 @@ export class Gfx {
     private ctx: CanvasRenderingContext2D;
 
     private headSprite = this.loadSprite("assets/head.png", 16, 16);
+    private bodySprite = this.loadSprite("assets/body.png", 16, 16);
     private tailSprite = this.loadSprite("assets/tail.png", 16, 16);
+
+    private scrollAmount = 0;
 
     private loadSprite(path: string, w: number, h: number) {
         let image = document.createElement("img");
@@ -35,6 +38,10 @@ export class Gfx {
         this.ctx = res;
     }
 
+    public setScroll(amount: number) {
+        this.scrollAmount = amount;
+    }
+
     public drawSprite(loc: Loc2, sprite: Sprite) {
         this.ctx.save();
 
@@ -51,6 +58,10 @@ export class Gfx {
 
     public drawTailSegment(loc: Loc2) {
         this.drawSprite(loc, this.tailSprite);
+    }
+
+    public drawBodySegment(loc: Loc2) {
+        this.drawSprite(loc, this.bodySprite);
     }
 
     public clear() {

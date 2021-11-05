@@ -9,6 +9,8 @@ export class Game {
     private player: Serpent;
     private controller: Controller;
 
+    private scrollAmount = 0;
+
     constructor(private gfx: Gfx) {
         this.controller = new Controller(document);
         this.player = new Serpent({ x: 50, y: 100 }, this.controller);
@@ -20,13 +22,13 @@ export class Game {
 
 
     private draw() {
+        this.gfx.setScroll(this.scrollAmount)
         this.gfx.clear();
         this.player.draw(this.gfx);
     }
 
 
     public update() {
-
         this.draw();
 
         this.player.update();

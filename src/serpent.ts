@@ -33,7 +33,7 @@ export class Serpent {
 
         for (let i = this.trailSegments.length - 1; i > 0; i -= 10) {
             let segment = this.trailSegments[i];
-            gfx.drawTailSegment(segment);
+            gfx.drawBodySegment(segment);
         }
 
         gfx.drawHead(this.pos.x, this.pos.y, this.angle);
