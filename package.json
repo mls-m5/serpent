@@ -1,0 +1,28 @@
+{
+  "name": "serpent",
+  "version": "1.0.0",
+  "description": "Game jam",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piktiv/gamejam-2021-serpent.git"
+  },
+  "keywords": [
+    "gamejam"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/piktiv/gamejam-2021-serpent/issues"
+  },
+  "homepage": "https://github.com/piktiv/gamejam-2021-serpent#readme",
+  "dependencies": {
+    "http-server": "^14.0.0",
+    "ts-node": "^10.4.0",
+    "tsc": "^2.0.3",
+    "typescript": "^4.4.4"
+  }
+}
