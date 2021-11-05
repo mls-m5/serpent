@@ -1,10 +1,14 @@
 
 import { Gfx } from "./gfx";
+import { Game } from "./game";
 
 const test = document.getElementById('hello');
 
 if (test) test.innerText = 'COool';
 
-let gfx = new Gfx(document.body as HTMLBodyElement);
+const gfx = new Gfx(document.body as HTMLBodyElement);
 
-gfx.drawHead(10, 10, 20);
+const game = new Game(gfx);
+
+game.start();
+
