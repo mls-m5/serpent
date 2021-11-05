@@ -6,4 +6,5 @@ export let settings = {
     scrollSpeed: .2,
     segmentSeparation: 10,
     serpentLength: 200,
+    serpentSize: 16,
 };

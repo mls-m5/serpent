@@ -9,6 +9,8 @@ export class Serpent {
     private angle: number = Math.PI;
     private trailSegments: Array<Loc2> = [];
 
+    public readonly size = settings.serpentSize;
+
     constructor(
         private pos: Vec2,
         private controller: Controller,
@@ -46,7 +48,7 @@ export class Serpent {
     }
 
     private checkSelfCollision() {
-        let segmentIndex = this.collideWithBody(this.pos, 16);
+        let segmentIndex = this.collideWithBody(this.pos, settings.serpentSize);
         if (segmentIndex) {
             this.eatSelf(segmentIndex);
         }
@@ -77,13 +79,17 @@ export class Serpent {
 
     }
 
+    public getPos() {
+        return this.pos;
+    }
+
     public collideWithBody(v: Vec2, size: number): number | undefined {
         let separation = settings.segmentSeparation;
         for (let i = 0; i < this.trailSegments.length - separation * 2; i += separation) {
             let segment = this.trailSegments[i];
             let dx = segment.x - v.x;
             let dy = segment.y - v.y;
-            let d = size / 2 + 16 / 2;
+            let d = size / 2 + settings.serpentSize / 2;
             if (dx * dx + dy * dy < d * d) {
                 return i;
             }

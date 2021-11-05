@@ -11,7 +11,7 @@ export class Obstacle {
         let dx = this.pos.x - v.x;
         let dy = this.pos.y - v.y;
 
-        let d = this.size + size;
+        let d = (this.size + size) / 2;
         return dx * dx + dy * dy < d * d;
     }
 

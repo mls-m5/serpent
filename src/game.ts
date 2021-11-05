@@ -52,6 +52,14 @@ export class Game {
         }
     }
 
+    private collidePlayerWithStuff() {
+        for (let obstacle of this.obstacles) {
+            if (obstacle.isCollision(this.player.getPos(), this.player.size)) {
+                this.runGameLoop = false;
+            }
+        }
+    }
+
     public update() {
         if (!this.runGameLoop) {
             return;
@@ -60,6 +68,8 @@ export class Game {
         this.draw();
 
         this.player.update();
+
+        this.collidePlayerWithStuff();
 
         window.requestAnimationFrame(() => this.update());
     }
