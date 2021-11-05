@@ -1,10 +1,10 @@
 
 
 export class Sprites {
-    private headSprite = this.loadSprite("assets/head.png", 16, 16);
-    private bodySprite = this.loadSprite("assets/body.png", 16, 16);
-    private tailSprite = this.loadSprite("assets/tail.png", 16, 16);
-    private rock1 = this.loadSprite("assets/rock-big-1", 16, 16);
+    public headSprite = this.loadSprite("assets/head.png", 16, 16);
+    public bodySprite = this.loadSprite("assets/body.png", 16, 16);
+    public tailSprite = this.loadSprite("assets/tail.png", 16, 16);
+    public rock1 = this.loadSprite("assets/rock-big-1", 16, 16);
 
     constructor(private body: HTMLBodyElement) { }
 
