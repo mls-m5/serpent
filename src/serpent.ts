@@ -10,7 +10,7 @@ export class Serpent {
     private trailSegments: Array<Loc2> = [];
 
     constructor(
-        private pos: Vec2, 
+        private pos: Vec2,
         private controller: Controller,
         private audio: GameAudio,
     ) {
@@ -26,7 +26,7 @@ export class Serpent {
             this.angle += turnRate;
         }
 
-        if(this.audio.Slither.paused){
+        if (this.audio.Slither.paused) {
             this.audio.Slither.loop = true;
             this.audio.Slither.play();
         }
@@ -36,14 +36,26 @@ export class Serpent {
 
         // Todo: Maybe handle in some other way
         this.trailSegments.push({ ... this.pos, angle: this.angle });
+        this.checkSelfCollision();
 
-        let i = this.collide(this.pos, 16);
-        if (i) {
-            this.audio.Swallow.play();
-            this.trailSegments = this.trailSegments.slice(i);
-            settings.serpentLength = this.trailSegments.length - i;
+
+        // Pop the first element
+        if (this.trailSegments.length > settings.serpentLength) {
+            this.trailSegments.shift();
         }
+    }
 
+    private checkSelfCollision() {
+        let segmentIndex = this.collideWithBody(this.pos, 16);
+        if (segmentIndex) {
+            this.eatSelf(segmentIndex);
+        }
+    }
+
+    private eatSelf(segmentIndex: number) {
+        this.audio.Swallow.play();
+        this.trailSegments = this.trailSegments.slice(segmentIndex);
+        settings.serpentLength = this.trailSegments.length - segmentIndex;
     }
 
     public draw(gfx: Gfx) {
@@ -63,13 +75,9 @@ export class Serpent {
 
         gfx.drawHead(this.pos.x, this.pos.y, this.angle);
 
-        // Pop the first element
-        if (this.trailSegments.length > settings.serpentLength) {
-            this.trailSegments.shift();
-        }
     }
 
-    public collide(v: Vec2, size: number) {
+    public collideWithBody(v: Vec2, size: number): number | undefined {
         let separation = settings.segmentSeparation;
         for (let i = 0; i < this.trailSegments.length - separation * 2; i += separation) {
             let segment = this.trailSegments[i];
@@ -80,7 +88,7 @@ export class Serpent {
                 return i;
             }
         }
-        return 0;
+        return undefined;
     }
 
 };

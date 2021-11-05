@@ -11,9 +11,9 @@ export class Game {
     private controller: Controller;
 
     private scrollAmount = 0;
-    
+
     constructor(
-        private gfx: Gfx, 
+        private gfx: Gfx,
         private audio: GameAudio
     ) {
         this.controller = new Controller(document);
