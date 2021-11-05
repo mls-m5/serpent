@@ -8,6 +8,9 @@ export class Obstacle {
     constructor(private pos: Vec2, private size: number) { }
 
     isCollision(v: Vec2, size: number): boolean {
+        if (this.isDead) {
+            return false;
+        }
         let dx = this.pos.x - v.x;
         let dy = this.pos.y - v.y;
 
@@ -16,7 +19,7 @@ export class Obstacle {
     }
 
     draw(gfx: Gfx) {
-        gfx.drawBodySegment({ x: this.pos.x, y: this.pos.y, angle: 0 });
+        gfx.drawSprite({ x: this.pos.x, y: this.pos.y, angle: 0 }, gfx.sprites.rock1);
     }
 
     update() {

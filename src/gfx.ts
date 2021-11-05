@@ -29,6 +29,7 @@ export class Gfx {
             throw new Error('Failed to get 2D context');
         }
         this.ctx = res;
+        this.ctx.imageSmoothingEnabled = false;
     }
 
     public setScroll(amount: number) {

@@ -20,7 +20,11 @@ export class Game {
         private audio: GameAudio
     ) {
         this.controller = new Controller(document);
-        this.controller.onKeyPressed(KeyboardKey.SPACE, () => this.runGameLoop ? this.pause() : this.start());
+
+        setTimeout(
+            () => this.controller.onKeyPressed(KeyboardKey.SPACE, () => this.runGameLoop ? this.pause() : this.start()),
+            100
+        );
 
         this.player = new Serpent({ x: 50, y: 100 }, this.controller, this.audio);
     }
@@ -55,9 +59,10 @@ export class Game {
     private collidePlayerWithStuff() {
         for (let obstacle of this.obstacles) {
             if (obstacle.isCollision(this.player.getPos(), this.player.size)) {
-                this.runGameLoop = false;
+                obstacle.isDead = true;
             }
         }
+
     }
 
     public update() {
