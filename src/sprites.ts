@@ -11,8 +11,9 @@ export class Sprites {
     constructor(private body: HTMLBodyElement) { }
 
     private loadSprite(path: string, w: number, h: number) {
-        let image = document.createElement("img");
+        const image = document.createElement("img");
         image.src = path;
+        image.hidden = true;
         this.body.appendChild(image);
         return { image: image, w: w, h: h };
     }

@@ -14,6 +14,7 @@ export class Game {
 
     private scrollAmount = 0;
     private runGameLoop = false;
+    private hasGameStarted = false;
 
     constructor(
         private gfx: Gfx,
@@ -42,8 +43,11 @@ export class Game {
     }
 
     public start() {
-        this.setupLevel();
+        if (!this.hasGameStarted) {
+            this.setupLevel();
+        }
         this.runGameLoop = true;
+        this.hasGameStarted = true;
         this.update();
     }
 
@@ -62,7 +66,7 @@ export class Game {
                 obstacle.isDead = true;
             }
         }
-
+        this.obstacles = this.obstacles.filter((obstacle) => !obstacle.isDead);
     }
 
     public update() {
