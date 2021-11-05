@@ -7,6 +7,9 @@ export class Sprites {
     public rock1 = this.loadSprite("assets/rock-big-1.png", 16, 16);
     public rock2 = this.loadSprite("assets/rock-big-2.png", 16, 16);
     public rock3 = this.loadSprite("assets/rock-big-3.png", 16, 16);
+    public apple = this.loadSprite("assets/apple.png", 16, 16);
+    public orange = this.loadSprite("assets/orange.png", 16, 16);
+    public cherry = this.loadSprite("assets/cherry.png", 16, 16);
 
     constructor(private body: HTMLBodyElement) { }
 

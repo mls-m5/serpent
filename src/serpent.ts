@@ -42,8 +42,10 @@ export class Serpent {
 
 
         // Pop the first element
-        if (this.trailSegments.length > settings.serpentLength) {
-            this.trailSegments.shift();
+        for (let i = 0; i < 2; ++i) {
+            if (settings.serpentLength > 0 && this.trailSegments.length > settings.serpentLength) {
+                this.trailSegments.shift();
+            }
         }
     }
 
@@ -58,6 +60,15 @@ export class Serpent {
         this.audio.Swallow.play();
         this.trailSegments = this.trailSegments.slice(segmentIndex);
         settings.serpentLength = this.trailSegments.length - segmentIndex;
+    }
+
+    private shopOfEnd(amount: number) {
+        this.trailSegments = this.trailSegments.slice(this.trailSegments.length - amount);
+        settings.serpentLength -= amount;
+    }
+
+    public hurt() {
+        this.shopOfEnd(100);
     }
 
     public draw(gfx: Gfx) {

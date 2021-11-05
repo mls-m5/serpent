@@ -6,6 +6,7 @@ import { KeyboardKey } from './keyboard-key';
 import { GameAudio } from "./game-audio";
 import { Obstacle } from "./obstacle";
 import { Particles } from "./particles";
+import { Rock } from './rock';
 
 
 export class Game {
@@ -40,7 +41,7 @@ export class Game {
         for (let i = 0; i < 10; ++i) {
             let x = Math.random() * 200;
             let y = Math.random() * 200;
-            this.obstacles.push(new Obstacle({ x: x, y: y }, 16));
+            this.obstacles.push(new Rock({ x: x, y: y }, 16));
         }
     }
 
@@ -70,6 +71,9 @@ export class Game {
             if (obstacle.isCollision(this.player.getPos(), this.player.size)) {
                 obstacle.isDead = true;
                 this.particles.explosion(obstacle.getPos());
+                if (!obstacle.isFood) {
+                    this.player.hurt();
+                }
             }
         }
         this.obstacles = this.obstacles.filter((obstacle) => !obstacle.isDead);
