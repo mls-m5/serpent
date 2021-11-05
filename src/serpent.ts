@@ -26,6 +26,13 @@ export class Serpent {
 
         // Todo: Maybe handle in some other way
         this.trailSegments.push({ ... this.pos, angle: this.angle });
+
+        let i = this.collide(this.pos, 16);
+        if (i) {
+            this.trailSegments = this.trailSegments.slice(i);
+            settings.serpentLength = this.trailSegments.length - i;
+        }
+
     }
 
     public draw(gfx: Gfx) {
@@ -46,9 +53,23 @@ export class Serpent {
         gfx.drawHead(this.pos.x, this.pos.y, this.angle);
 
         // Pop the first element
-        if (this.trailSegments.length > 200) {
+        if (this.trailSegments.length > settings.serpentLength) {
             this.trailSegments.shift();
         }
-
     }
+
+    public collide(v: Vec2, size: number) {
+        let separation = settings.segmentSeparation;
+        for (let i = 0; i < this.trailSegments.length - separation * 2; i += separation) {
+            let segment = this.trailSegments[i];
+            let dx = segment.x - v.x;
+            let dy = segment.y - v.y;
+            let d = size / 2 + 16 / 2;
+            if (dx * dx + dy * dy < d * d) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
 };

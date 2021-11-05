@@ -5,4 +5,5 @@ export let settings = {
     turnRate: .1,
     scrollSpeed: .2,
     segmentSeparation: 10,
+    serpentLength: 200,
 };
