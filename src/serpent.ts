@@ -1,4 +1,5 @@
 import { Controller } from "./controller";
+import { GameAudio } from "./game-audio";
 import { Gfx } from "./gfx";
 import { KeyboardKey } from "./keyboard-key";
 import { Loc2, Vec2 } from "./vec2";
@@ -8,7 +9,11 @@ export class Serpent {
     private angle: number = Math.PI;
     private trailSegments: Array<Loc2> = [];
 
-    constructor(private pos: Vec2, private controller: Controller) {
+    constructor(
+        private pos: Vec2, 
+        private controller: Controller,
+        private audio: GameAudio,
+    ) {
     }
 
     public update() {
@@ -19,6 +24,11 @@ export class Serpent {
         }
         if (this.controller.isKeyPressed(KeyboardKey.RIGHT_ARROW)) {
             this.angle += turnRate;
+        }
+
+        if(this.audio.Slither.paused){
+            this.audio.Slither.loop = true;
+            this.audio.Slither.play();
         }
 
         this.pos.x += Math.sin(-this.angle) * speed;
