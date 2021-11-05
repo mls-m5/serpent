@@ -1,4 +1,5 @@
 import { Loc2 } from "./vec2";
+import { Sprites } from "./sprites";
 
 interface Sprite {
     image: HTMLImageElement;
@@ -10,24 +11,16 @@ export class Gfx {
     private readonly canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
 
-    private headSprite = this.loadSprite("assets/head.png", 16, 16);
-    private bodySprite = this.loadSprite("assets/body.png", 16, 16);
-    private tailSprite = this.loadSprite("assets/tail.png", 16, 16);
-
     private scrollAmount = 0;
 
-    private loadSprite(path: string, w: number, h: number) {
-        let image = document.createElement("img");
-        image.src = path;
-        this.body.appendChild(image);
-        return { image: image, w: w, h: h };
-    }
-
+    public sprites: Sprites;
 
     constructor(public body: HTMLBodyElement) {
         this.canvas = document.createElement('canvas');
         this.canvas.style.height = '90vh';
         this.canvas.style.width = '90vw';
+
+        this.sprites = new Sprites(body);
 
         this.body.appendChild(this.canvas);
 
@@ -54,15 +47,15 @@ export class Gfx {
     }
 
     public drawHead(x: number, y: number, angle: number) {
-        this.drawSprite({ x: x, y: y, angle: angle }, this.headSprite);
+        this.drawSprite({ x: x, y: y, angle: angle }, this.sprites.headSprite);
     }
 
     public drawTailSegment(loc: Loc2) {
-        this.drawSprite(loc, this.tailSprite);
+        this.drawSprite(loc, this.sprites.tailSprite);
     }
 
     public drawBodySegment(loc: Loc2) {
-        this.drawSprite(loc, this.bodySprite);
+        this.drawSprite(loc, this.sprites.bodySprite);
     }
 
     public clear() {

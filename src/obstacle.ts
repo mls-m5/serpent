@@ -5,7 +5,7 @@ import { Vec2 } from "./vec2";
 export class Obstacle {
     public isDead = false;
 
-    constructor(private pos: Vec2, private size: number, private gfx: Gfx) { }
+    constructor(private pos: Vec2, private size: number) { }
 
     isCollision(v: Vec2, size: number): boolean {
         let dx = this.pos.x - v.x;
@@ -15,12 +15,11 @@ export class Obstacle {
         return dx * dx + dy * dy < d * d;
     }
 
-    draw() {
-        this.gfx.drawBodySegment({ x: this.pos.x, y: this.pos.y, angle: 0 });
+    draw(gfx: Gfx) {
+        gfx.drawBodySegment({ x: this.pos.x, y: this.pos.y, angle: 0 });
     }
 
     update() {
-        // Todo check if outside 
     }
 
 }

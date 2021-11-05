@@ -22,6 +22,7 @@ export class Controller {
     }
 
     private keyDownHandler(event: { keyCode: KeyboardKey }) {
+        this.callbacks.get(event.keyCode)?.forEach(callback => callback());
         this.keyInputs.add(event.keyCode);
     }
     private keyUpHandler(event: { keyCode: KeyboardKey }) {

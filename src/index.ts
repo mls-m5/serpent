@@ -12,6 +12,3 @@ const gfx = new Gfx(document.body as HTMLBodyElement);
 
 
 const game = new Game(gfx, new GameAudio(document));
-
-
-game.start();
