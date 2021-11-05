@@ -11,7 +11,7 @@ export class Game {
 
     constructor(private gfx: Gfx) {
         this.controller = new Controller(document);
-        this.player = new Serpent({ x: 200, y: 200 }, this.controller);
+        this.player = new Serpent({ x: 50, y: 100 }, this.controller);
     }
 
     public start() {

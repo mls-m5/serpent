@@ -2,8 +2,8 @@ export class Gfx {
     private readonly canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
     private headImg: HTMLImageElement
-    private imgWidth = 128;
-    private imgHeight = 128;
+    private imgWidth = 16;
+    private imgHeight = 16;
 
     constructor(public body: HTMLBodyElement) {
         this.canvas = document.createElement('canvas');
@@ -13,7 +13,7 @@ export class Gfx {
         this.body.appendChild(this.canvas);
 
         this.headImg = document.createElement("img");
-        this.headImg.src = "assets/testhead.png";
+        this.headImg.src = "assets/head.png";
         this.body.appendChild(this.headImg);
 
 
@@ -26,6 +26,7 @@ export class Gfx {
 
     public drawHead(x: number, y: number, angle: number) {
         this.ctx.save();
+
 
         this.ctx.translate(x, y);
         this.ctx.rotate(angle);
