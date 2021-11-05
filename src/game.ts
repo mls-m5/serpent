@@ -20,15 +20,14 @@ export class Game {
         setTimeout(() => this.update(), 100);
     }
 
-
     private draw() {
         this.gfx.setScroll(this.scrollAmount)
         this.gfx.clear();
         this.player.draw(this.gfx);
     }
 
-
     public update() {
+        this.scrollAmount += .1;
         this.draw();
 
         this.player.update();

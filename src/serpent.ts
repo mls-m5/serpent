@@ -2,28 +2,27 @@ import { Controller } from "./controller";
 import { Gfx } from "./gfx";
 import { KeyboardKey } from "./keyboard-key";
 import { Loc2, Vec2 } from "./vec2";
+import { settings } from "./settings";
 
 export class Serpent {
     private angle: number = Math.PI;
     private trailSegments: Array<Loc2> = [];
 
-    private readonly speed: number = 1;
-    private readonly turnRate: number = .1;
-
-
     constructor(private pos: Vec2, private controller: Controller) {
     }
 
     public update() {
+        let speed = settings.slitherSpeed;
+        let turnRate = settings.turnRate;
         if (this.controller.isKeyPressed(KeyboardKey.LEFT_ARROW)) {
-            this.angle -= this.turnRate;
+            this.angle -= turnRate;
         }
         if (this.controller.isKeyPressed(KeyboardKey.RIGHT_ARROW)) {
-            this.angle += this.turnRate;
+            this.angle += turnRate;
         }
 
-        this.pos.x += Math.sin(-this.angle) * this.speed;
-        this.pos.y += Math.cos(-this.angle) * this.speed;
+        this.pos.x += Math.sin(-this.angle) * speed;
+        this.pos.y += Math.cos(-this.angle) * speed;
 
         // Todo: Maybe handle in some other way
         this.trailSegments.push({ ... this.pos, angle: this.angle });

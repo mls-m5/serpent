@@ -45,6 +45,7 @@ export class Gfx {
     public drawSprite(loc: Loc2, sprite: Sprite) {
         this.ctx.save();
 
+        this.ctx.translate(0, this.scrollAmount);
         this.ctx.translate(loc.x, loc.y);
         this.ctx.rotate(loc.angle);
         this.ctx.translate(-sprite.w / 2, -sprite.h / 2)
