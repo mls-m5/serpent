@@ -1,8 +1,3 @@
-import {cool} from './test';
 
-const canvas = document.getElementById('canvas');
-const test = document.getElementById('hello');
-
-if(test) test.innerText = 'COool';
-
-cool();
+const canvas = document.createElement('canvas');
+document.body.appendChild(canvas)
