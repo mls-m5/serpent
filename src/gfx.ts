@@ -41,11 +41,13 @@ export class Gfx {
         this.scrollAmount = amount;
     }
 
+    public resetTransform() {
+    }
+
     public drawSprite(loc: Loc2, sprite: Sprite) {
         this.ctx.resetTransform();
-        this.ctx.scale(16, 16);
+        this.ctx.scale(8, 8);
         this.ctx.save();
-
         this.ctx.translate(0, this.scrollAmount);
         this.ctx.translate(loc.x, loc.y);
         this.ctx.rotate(loc.angle);
@@ -69,7 +71,7 @@ export class Gfx {
 
     public drawParticles(particles: Array<Particle>) {
         for (let particle of particles) {
-            this.ctx.fillRect(particle.x, particle.y, 1, 1);
+            this.ctx.fillRect(particle.x, particle.y + this.scrollAmount, 1, 1);
         }
     }
 

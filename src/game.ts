@@ -56,16 +56,20 @@ export class Game {
     private draw() {
         this.gfx.setScroll(this.scrollAmount)
         this.gfx.clear();
+        this.gfx.resetTransform();
         this.player.draw(this.gfx);
         for (let obstacle of this.obstacles) {
             obstacle.draw(this.gfx);
         }
+
+        this.particles.draw(this.gfx);
     }
 
     private collidePlayerWithStuff() {
         for (let obstacle of this.obstacles) {
             if (obstacle.isCollision(this.player.getPos(), this.player.size)) {
                 obstacle.isDead = true;
+                this.particles.explosion(obstacle.getPos());
             }
         }
         this.obstacles = this.obstacles.filter((obstacle) => !obstacle.isDead);
@@ -81,6 +85,7 @@ export class Game {
         this.player.update();
 
         this.collidePlayerWithStuff();
+        this.particles.update();
 
         window.requestAnimationFrame(() => this.update());
     }

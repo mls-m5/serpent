@@ -4,4 +4,5 @@ export interface Particle {
     y: number
     vx: number
     vy: number
+    duration: number
 }
