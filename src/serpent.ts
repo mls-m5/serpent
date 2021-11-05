@@ -29,10 +29,18 @@ export class Serpent {
     }
 
     public draw(gfx: Gfx) {
+        let separation = settings.segmentSeparation;
 
-        for (let i = this.trailSegments.length - 1; i > 0; i -= 10) {
+        for (let i = this.trailSegments.length - 1; i > separation / 2; i -= separation) {
             let segment = this.trailSegments[i];
             gfx.drawBodySegment(segment);
+        }
+
+        {
+            if (this.trailSegments.length) {
+                let segment = this.trailSegments[0];
+                gfx.drawTailSegment({ x: segment.x, y: segment.y, angle: segment.angle + Math.PI });
+            }
         }
 
         gfx.drawHead(this.pos.x, this.pos.y, this.angle);
