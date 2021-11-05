@@ -1,5 +1,7 @@
 import { Loc2 } from "./vec2";
 import { Sprites } from "./sprites";
+import { settings } from "./settings";
+import { Particle } from "./particle";
 
 interface Sprite {
     image: HTMLImageElement;
@@ -32,7 +34,7 @@ export class Gfx {
             throw new Error('Failed to get 2D context');
         }
         this.ctx = res;
-        this.ctx.imageSmoothingEnabled = false;
+        this.ctx.imageSmoothingEnabled = settings.enableImageSmoothing;
     }
 
     public setScroll(amount: number) {
@@ -63,6 +65,12 @@ export class Gfx {
 
     public drawBodySegment(loc: Loc2) {
         this.drawSprite(loc, this.sprites.bodySprite);
+    }
+
+    public drawParticles(particles: Array<Particle>) {
+        for (let particle of particles) {
+            this.ctx.fillRect(particle.x, particle.y, 1, 1);
+        }
     }
 
     public clear() {

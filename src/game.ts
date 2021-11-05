@@ -5,12 +5,14 @@ import { Controller } from './controller';
 import { KeyboardKey } from './keyboard-key';
 import { GameAudio } from "./game-audio";
 import { Obstacle } from "./obstacle";
+import { Particles } from "./particles";
 
 
 export class Game {
     private player: Serpent;
     private obstacles: Array<Obstacle> = [];
     private controller: Controller;
+    private particles: Particles;
 
     private scrollAmount = 0;
     private runGameLoop = false;
@@ -21,12 +23,12 @@ export class Game {
         private audio: GameAudio
     ) {
         this.controller = new Controller(document);
+        this.particles = new Particles();
 
         setTimeout(
             () => this.controller.onKeyPressed(KeyboardKey.SPACE, () => this.runGameLoop ? this.pause() : this.start()),
             100
         );
-
         this.player = new Serpent({ x: 50, y: 100 }, this.controller, this.audio);
     }
 
