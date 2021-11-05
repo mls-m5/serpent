@@ -39,6 +39,7 @@ export class Serpent {
 
         let i = this.collide(this.pos, 16);
         if (i) {
+            this.audio.Swallow.play();
             this.trailSegments = this.trailSegments.slice(i);
             settings.serpentLength = this.trailSegments.length - i;
         }
