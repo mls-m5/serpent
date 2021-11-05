@@ -9,12 +9,9 @@ interface Sprite {
 export class Gfx {
     private readonly canvas: HTMLCanvasElement;
     private ctx: CanvasRenderingContext2D;
-    private headImg: HTMLImageElement
-    // private imgWidth = 16;
-    // private imgHeight = 16;
 
-    private headSprite: Sprite;
-    private tailSprite: Sprite;
+    private headSprite = this.loadSprite("assets/head.png", 16, 16);
+    private tailSprite = this.loadSprite("assets/tail.png", 16, 16);
 
     private loadSprite(path: string, w: number, h: number) {
         let image = document.createElement("img");
@@ -30,9 +27,6 @@ export class Gfx {
         this.canvas.style.width = '90vw';
 
         this.body.appendChild(this.canvas);
-
-        this.headSprite = this.loadSprite("assets/head.png", 16, 16);
-        this.tailSprite = this.loadSprite("assets/tail.png", 16, 16);
 
         let res = this.canvas.getContext("2d");
         if (!res || !(res instanceof CanvasRenderingContext2D)) {
