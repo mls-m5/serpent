@@ -17,8 +17,11 @@ export class Gfx {
 
     constructor(public body: HTMLBodyElement) {
         this.canvas = document.createElement('canvas');
-        this.canvas.style.height = '90vh';
-        this.canvas.style.width = '90vw';
+        this.canvas.width = 1920;
+        this.canvas.height = 1080;
+        this.canvas.style.width = '1920px';
+        this.canvas.style.height = '1080px';
+
 
         this.sprites = new Sprites(body);
 
@@ -37,12 +40,15 @@ export class Gfx {
     }
 
     public drawSprite(loc: Loc2, sprite: Sprite) {
+        this.ctx.resetTransform();
+        this.ctx.scale(16, 16);
         this.ctx.save();
 
         this.ctx.translate(0, this.scrollAmount);
         this.ctx.translate(loc.x, loc.y);
         this.ctx.rotate(loc.angle);
-        this.ctx.translate(-sprite.w / 2, -sprite.h / 2)
+        this.ctx.translate(-sprite.w / 2, -sprite.h / 2);
+        this.ctx.scale(1 / 16, 1 / 16);
         this.ctx.drawImage(sprite.image, 0, 0);
         this.ctx.restore();
     }
