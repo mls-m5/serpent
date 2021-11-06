@@ -35,10 +35,7 @@ Features
 - [x] Skärm som visar text när man har dött
 - [x] Dö utanför spelområdet
 - [x] Poäng äpplen + scroll
-- [ ] Krabbor eller fiender
+- [x] Krabbor eller fiender - rullande stenar
 - [x] Slumpa frukt sprite
 - [x] Ta bort stenar utanför spelområdet
 - [x] Rita blodpartiklar när död
-
-Never?
-- [ ] Slower when hurt
