@@ -26,11 +26,11 @@ Polish
 - [ ] Profit!
 
 Features
-- [ ] Scale so it is possible to play on smaller screens
+- [x] Scale so it is possible to play on smaller screens
 - [x] Skaka skärmen rot+pos
 - [x] Dolj ormen när död
 - [x] Stoppa ljud när ormen dör
-- [ ] Musik
+- [x] Musik
 - [ ] Energidrycks-musik
 - [ ] Skärm som visar text när man har dött
 - [x] Dö utanför spelområdet
