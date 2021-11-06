@@ -14,6 +14,7 @@ export class Gfx {
     private ctx: CanvasRenderingContext2D;
 
     private scrollAmount = 0;
+    private shakeAmount: Loc2 = { x: 0, y: 0, angle: 0 };
 
     public sprites: Sprites;
 
@@ -44,9 +45,23 @@ export class Gfx {
     public resetTransform() {
     }
 
+    public update() {
+        this.shakeAmount.angle /= 1.1;
+        this.shakeAmount.x /= 1.1;
+        this.shakeAmount.y /= 1.1;
+    }
+
+    public shake(amount: number) {
+        this.shakeAmount.x = amount * Math.random();
+        this.shakeAmount.y = amount * Math.random();
+        this.shakeAmount.angle = amount * Math.random() / 100;
+    }
+
     public drawSprite(loc: Loc2, sprite: Sprite, scale = 1, opacity = 1) {
         this.ctx.resetTransform();
         this.ctx.scale(8, 8);
+        this.ctx.translate(this.shakeAmount.x, this.shakeAmount.y);
+        //this.ctx.rotate(this.shakeAmount.angle);
         this.ctx.save();
         this.ctx.translate(0, this.scrollAmount);
         this.ctx.translate(loc.x, loc.y);

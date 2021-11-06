@@ -117,6 +117,7 @@ export class Game {
                         break;
                     case Rock:
                         this.player.hurt();
+                        this.gfx.shake(10);
                         console.log('sad');
                         break;
 
@@ -147,8 +148,8 @@ export class Game {
 
     }
     private frameStart = new Date().getTime();
-    private frameRates: number[] = [0,2,3,4,5,6,7,8,9];
-    private avgFrameRate(){
+    private frameRates: number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9];
+    private avgFrameRate() {
         const sum = this.frameRates.reduce((a, b) => a + b, 0);
         const avg = (sum / this.frameRates.length) || 0;
         return Math.floor(avg);
@@ -163,6 +164,7 @@ export class Game {
         this.frameRates.shift();
         this.frameStart = new Date().getTime();
         this.scrollAmount += .1;
+        this.gfx.update();
         this.draw();
 
         this.spawnFromTop();
