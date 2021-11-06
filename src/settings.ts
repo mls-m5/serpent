@@ -17,7 +17,7 @@ export const settings = {
     eatAppleHeal: 20,
     rockCooldown: 100,
     appleCooldown: 1000,
-    energyDrinkCooldown: 50000,
+    energyDrinkCooldown: 1500,
     energyDrinkSpeedBoost: 2,
     energyDrinkLifetime: 10_000, // ms
 };
