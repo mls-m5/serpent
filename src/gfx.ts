@@ -22,8 +22,15 @@ export class Gfx {
         this.canvas = document.createElement('canvas');
         this.canvas.width = settings.width;
         this.canvas.height = settings.height;
-        this.canvas.style.width = '1920px';
-        this.canvas.style.height = '1080px';
+
+        const borderOffset = 8;
+        const normalHeight = (window.innerHeight - borderOffset) / 9;
+        const normalWidth = (window.innerWidth - borderOffset) / 16;
+        const smallest = Math.min(normalHeight, normalWidth)
+
+        this.canvas.style.width = `${smallest * 16}px`;
+        this.canvas.style.height = `${smallest * 9}px`;
+
         this.canvas.style.border = '4px solid black';
 
 
