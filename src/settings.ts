@@ -5,7 +5,7 @@ export const settings = {
     turnRate: .1,
     scrollSpeed: .2,
     segmentSeparation: 10,
-    serpentLength: 200,
+    serpentLength: 100,
     serpentSize: 16,
     enableImageSmoothing: true,
 };
