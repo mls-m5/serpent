@@ -4,11 +4,15 @@ export const settings = {
     slitherSpeed: 1,
     turnRate: .1,
     scrollSpeed: .2,
-    segmentSeparation: 10,
+    // We need to have different separation values for the rendering and hitbox because 
+    // otherwise we'll get an overly agreesive hitbox OOOOOR
+    // We'll get gaps in our serpent
+    segmentSeparationHitbox: 10,
+    segmentSeparationRender: (speed: number) => Math.floor(10 / speed),
     serpentLength: 100,
     serpentSize: 16,
     enableImageSmoothing: true,
-    hitRockDamage: 40,
+    hitRockDamage: 10,
     eatAppleHeal: 20,
     rockCooldown: 100,
     appleCooldown: 1000,

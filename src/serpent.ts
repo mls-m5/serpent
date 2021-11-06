@@ -74,18 +74,19 @@ export class Serpent {
         this.length = Math.max(this.length - settings.hitRockDamage, 0);
     }
 
-    public buff() {
+    public eatApple() {
         this.length += settings.eatAppleHeal;
         this.size *= 1.05;
     }
     public drinkEnergyDrink() {
         const previousSpeed = this.speed;
         this.speed *= settings.energyDrinkSpeedBoost;
-        setTimeout(() => this.speed = previousSpeed, settings.energyDrinkLifetime);
+        console.log(`speed was ${previousSpeed} now it's ${this.speed}`);
+        setTimeout(() => this.speed /= settings.energyDrinkSpeedBoost, settings.energyDrinkLifetime);
     }
 
     public draw(gfx: Gfx) {
-        let separation = settings.segmentSeparation;
+        let separation = settings.segmentSeparationRender(this.speed);
 
         for (let i = this.trailSegments.length - 1; i > separation / 2; i -= separation) {
             let segment = this.trailSegments[i];
@@ -106,7 +107,7 @@ export class Serpent {
     }
 
     public collideWithBody(v: Vec2, size: number): number | undefined {
-        let separation = settings.segmentSeparation;
+        let separation = settings.segmentSeparationHitbox;
         for (let i = 0; i < this.trailSegments.length - separation * 2; i += separation) {
             let segment = this.trailSegments[i];
             let dx = segment.x - v.x;

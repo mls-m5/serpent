@@ -90,6 +90,7 @@ export class Game {
         this.gfx.setScroll(this.scrollAmount)
         this.gfx.clear();
         this.gfx.resetTransform();
+        this.gfx.drawText(0, 5, this.avgFrameRate().toString(), 5);
         this.player.draw(this.gfx);
         for (let obstacle of this.obstacles) {
             obstacle.draw(this.gfx);
@@ -99,7 +100,7 @@ export class Game {
     }
 
     private collidePlayerWithStuff() {
-        for (let obstacle of this.obstacles) {
+        for (const obstacle of this.obstacles) {
             if (obstacle.isCollision(this.player.getPos(), this.player.size)) {
                 obstacle.isDead = true;
                 this.particles.explosion(obstacle.getPos());
@@ -107,9 +108,11 @@ export class Game {
                 switch (obstacle.constructor) {
                     case EnergyDrink:
                         this.player.drinkEnergyDrink();
-                        continue;
+                        console.log('energy');
+                        break;
                     case Fruit:
-                        this.player.buff();
+                        console.log(obstacle)
+                        this.player.eatApple();
                         console.log('buff');
                         break;
                     case Rock:
@@ -143,11 +146,22 @@ export class Game {
         }
 
     }
+    private frameStart = new Date().getTime();
+    private frameRates: number[] = [0,2,3,4,5,6,7,8,9];
+    private avgFrameRate(){
+        const sum = this.frameRates.reduce((a, b) => a + b, 0);
+        const avg = (sum / this.frameRates.length) || 0;
+        return Math.floor(avg);
+    };
 
     public update() {
         if (!this.runGameLoop) {
             return;
         }
+        const deltaTime = new Date().getTime() - this.frameStart
+        this.frameRates.push(1000 / deltaTime);
+        this.frameRates.shift();
+        this.frameStart = new Date().getTime();
         this.scrollAmount += .1;
         this.draw();
 
