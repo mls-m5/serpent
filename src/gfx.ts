@@ -116,4 +116,11 @@ export class Gfx {
     public clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
+
+    public overlay(color: string, opacity = 1) {
+        this.ctx.fillStyle = color;
+        this.ctx.globalAlpha = opacity;
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.globalAlpha = 1;
+    }
 }

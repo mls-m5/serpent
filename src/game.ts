@@ -13,6 +13,7 @@ import { TitleScreen } from "./titlescreen";
 import { settings } from "./settings";
 import { Score } from "./score";
 import { Vec2 } from "./vec2";
+import { EndScreen } from "./endscreen";
 
 
 export class Game {
@@ -21,6 +22,7 @@ export class Game {
     private controller: Controller;
     private particles = new Particles();
     private titleScreen = new TitleScreen;
+    private endScreen = new EndScreen;
     private score = new Score;
 
     private scrollAmount = 0;
@@ -110,6 +112,11 @@ export class Game {
         }
 
         this.particles.draw(this.gfx);
+
+        if (this.player.isDead) {
+            this.endScreen.draw(this.gfx);
+        }
+
         this.score.draw(this.gfx);
     }
 
