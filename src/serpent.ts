@@ -24,6 +24,28 @@ export class Serpent {
     ) {
     }
 
+    private playNormalMusic() {
+        if (this.audio.Play.paused && !this.isDead) {
+            this.audio.Play.loop = true;
+            this.audio.Play.play();
+        }
+        if (!this.audio.Energy.paused) {
+            this.audio.Energy.loop = true;
+            this.audio.Energy.pause();
+        }
+    }
+
+    private playEnergyMusic() {
+        if (this.audio.Energy.paused && !this.isDead) {
+            this.audio.Energy.loop = true;
+            this.audio.Energy.play();
+        }
+        if (!this.audio.Play.paused) {
+            this.audio.Play.loop = true;
+            this.audio.Play.pause();
+        }
+    }
+
     public update() {
         if (this.audio.Slither.paused && !this.isDead) {
             this.audio.Slither.loop = true;
@@ -33,10 +55,13 @@ export class Serpent {
             this.audio.Slither.pause();
         }
 
-        if (this.audio.Play.paused && !this.isDead) {
-            this.audio.Play.loop = true;
-            this.audio.Play.play();
+        if (this.speed == settings.slitherSpeed) {
+            this.playNormalMusic();
         }
+        else {
+            this.playEnergyMusic();
+        }
+
 
         if (this.isDead) {
             return;
@@ -48,8 +73,6 @@ export class Serpent {
         if (this.controller.isKeyPressed(KeyboardKey.RIGHT_ARROW)) {
             this.angle += this.turnRate;
         }
-
-
 
         this.pos.x += Math.sin(-this.angle) * this.speed;
         this.pos.y += Math.cos(-this.angle) * this.speed;
@@ -90,6 +113,9 @@ export class Serpent {
         if (this.length == 0) {
             this.isDead = true;
             if (!this.audio.Play.paused && this.isDead) {
+                this.audio.Play.pause();
+            }
+            if (!this.audio.Energy.paused && this.isDead) {
                 this.audio.Play.pause();
             }
             if (this.audio.Died.paused) {
