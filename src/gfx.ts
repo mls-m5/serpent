@@ -24,6 +24,7 @@ export class Gfx {
         this.canvas.height = 1080;
         this.canvas.style.width = '1920px';
         this.canvas.style.height = '1080px';
+        this.canvas.style.border = '4px solid black';
 
 
         this.sprites = new Sprites(body);
