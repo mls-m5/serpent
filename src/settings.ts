@@ -13,6 +13,7 @@ export const settings = {
     serpentSize: 16,
     enableImageSmoothing: true,
     hitRockDamage: 10,
+    numVisualDamageFrames: 5,
     eatAppleHeal: 20,
     rockCooldown: 100,
     appleCooldown: 1000,
