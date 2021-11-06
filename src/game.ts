@@ -12,6 +12,7 @@ import { EnergyDrink } from './energy-drink';
 import { TitleScreen } from "./titlescreen";
 import { settings } from "./settings";
 import { Score } from "./score";
+import { Vec2 } from "./vec2";
 
 
 export class Game {
@@ -169,6 +170,13 @@ export class Game {
         return Math.floor(avg);
     };
 
+    private isOutside(v: Vec2, margin = 0) {
+        return v.x < -margin ||
+            v.y + this.scrollAmount < -margin ||
+            v.x - margin > settings.width / settings.screenPreScale ||
+            v.y - margin + this.scrollAmount > settings.height / settings.screenPreScale;
+    }
+
     public update() {
         if (!this.runGameLoop) {
             return;
@@ -185,6 +193,12 @@ export class Game {
 
         this.player.update();
 
+        if (!this.player.isDead) {
+            if (this.isOutside(this.player.getPos(), 0)) {
+                this.player.hurt();
+            }
+        }
+
         this.collidePlayerWithStuff();
         this.particles.update();
 
@@ -193,5 +207,6 @@ export class Game {
         }
 
         window.requestAnimationFrame(() => this.update());
+
     }
 }
