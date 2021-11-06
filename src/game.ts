@@ -202,7 +202,7 @@ export class Game {
         this.player.update();
 
         if (!this.player.isDead) {
-            if (this.isOutside(this.player.getPos(), 0)) {
+            if (this.isOutside(this.player.getPos(), this.player.size / 2)) {
                 this.player.hurt();
             }
         }
