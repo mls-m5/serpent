@@ -6,7 +6,7 @@
             "es6",
             "DOM",
         ],
-        "declaration": true,
+        "declaration": false,
         "removeComments": false,
         "stripInternal": true,
         "sourceMap": true,

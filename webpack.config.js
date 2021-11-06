@@ -30,6 +30,7 @@ module.exports = {
       ],
     }),
   ],
+  devtool: 'source-map',
   output: {
     filename: 'index.js',
     path: path.resolve(__dirname, 'out'),
