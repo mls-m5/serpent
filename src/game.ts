@@ -120,12 +120,14 @@ export class Game {
                 switch (obstacle.constructor) {
                     case EnergyDrink:
                         this.player.drinkEnergyDrink();
+                        this.score.addScore(settings.energyDrinkScore);
                         console.log('energy');
                         break;
                     case Fruit:
                         console.log(obstacle)
                         this.player.eatApple();
                         console.log('buff');
+                        this.score.addScore(settings.appleScore);
                         break;
                     case Rock:
                         this.player.hurt();
@@ -187,7 +189,7 @@ export class Game {
         this.particles.update();
 
         if (!this.player.isDead) {
-            this.score.addScore(this.player.speed * this.player.speed);
+            this.score.addScore(this.player.speed * this.player.speed * settings.frameScoreMultier);
         }
 
         window.requestAnimationFrame(() => this.update());

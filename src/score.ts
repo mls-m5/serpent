@@ -8,6 +8,6 @@ export class Score {
     }
 
     public draw(gfx: Gfx) {
-        gfx.drawText(10, 10, "Score " + this.scoreAmount, 10);
+        gfx.drawText(10, 10, "Score " + Math.floor(this.scoreAmount), 10);
     }
 }

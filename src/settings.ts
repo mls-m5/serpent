@@ -20,4 +20,8 @@ export const settings = {
     energyDrinkCooldown: 1500,
     energyDrinkSpeedBoost: 2,
     energyDrinkLifetime: 10_000, // ms
+
+    frameScoreMultier: .1,
+    appleScore: 100,
+    energyDrinkScore: 200,
 };
