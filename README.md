@@ -36,6 +36,7 @@ Features
 - [x] Dö utanför spelområdet
 - [x] Poäng äpplen + scroll
 - [ ] Krabbor eller fiender
+- [ ] Slumpa frukt sprite
 - [x] Ta bort stenar utanför spelområdet
 - [ ] Rita blodpartiklar när död
 
