@@ -32,13 +32,13 @@ Features
 - [x] Stoppa ljud när ormen dör
 - [x] Musik
 - [ ] Energidrycks-musik
-- [ ] Skärm som visar text när man har dött
+- [x] Skärm som visar text när man har dött
 - [x] Dö utanför spelområdet
 - [x] Poäng äpplen + scroll
 - [ ] Krabbor eller fiender
 - [x] Slumpa frukt sprite
 - [x] Ta bort stenar utanför spelområdet
-- [ ] Rita blodpartiklar när död
+- [x] Rita blodpartiklar när död
 
 Never?
 - [ ] Slower when hurt

@@ -92,7 +92,7 @@ export class Serpent {
             if (!this.audio.Play.paused && this.isDead) {
                 this.audio.Play.pause();
             }
-            if (!this.audio.Died.paused) {
+            if (this.audio.Died.paused) {
                 this.audio.Died.play();
             }
         }
