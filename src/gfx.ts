@@ -20,8 +20,8 @@ export class Gfx {
 
     constructor(public body: HTMLBodyElement) {
         this.canvas = document.createElement('canvas');
-        this.canvas.width = 1920;
-        this.canvas.height = 1080;
+        this.canvas.width = settings.width;
+        this.canvas.height = settings.height;
         this.canvas.style.width = '1920px';
         this.canvas.style.height = '1080px';
         this.canvas.style.border = '4px solid black';
