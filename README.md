@@ -32,7 +32,7 @@ Features
 - [ ] Stoppa ljud när ormen dör
 - [ ] Musik
 - [ ] Dö utanför spelområdet
-- [ ] Poäng äpplen + scroll
+- [x] Poäng äpplen + scroll
 - [ ] Krabbor eller fiender
 - [ ] Ta bort stenar utanför spelområdet
 - [ ] Rita blodpartiklar när död
