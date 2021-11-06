@@ -25,6 +25,14 @@ export class Serpent {
     }
 
     public update() {
+        if (this.audio.Slither.paused && !this.isDead) {
+            this.audio.Slither.loop = true;
+            this.audio.Slither.play();
+        }
+        if(!this.audio.Slither.paused && this.isDead){
+            this.audio.Slither.pause();
+        }
+
         if (this.isDead) {
             return;
         }
@@ -36,10 +44,7 @@ export class Serpent {
             this.angle += this.turnRate;
         }
 
-        if (this.audio.Slither.paused) {
-            this.audio.Slither.loop = true;
-            this.audio.Slither.play();
-        }
+        
 
         this.pos.x += Math.sin(-this.angle) * this.speed;
         this.pos.y += Math.cos(-this.angle) * this.speed;
