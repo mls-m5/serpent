@@ -28,6 +28,7 @@ export class Game {
     private rockColodown = settings.rockCooldown;
     private appleCooldown = settings.appleCooldown;
     private energyDrinkCooldown = settings.energyDrinkCooldown;
+    private shouldShowFps = false;
 
     private width = 1080 / 4;
 
@@ -48,6 +49,7 @@ export class Game {
         );
         this.controller.onKeyPressed(KeyboardKey.KEY_R, () => location.reload()),
             this.player = new Serpent({ x: 50, y: 100 }, this.controller, this.audio);
+        this.controller.onKeyPressed(KeyboardKey.KEY_F, () => this.shouldShowFps = !this.shouldShowFps);
         this.titleScreen.draw(gfx);
     }
 
@@ -97,7 +99,9 @@ export class Game {
         this.gfx.setScroll(this.scrollAmount)
         this.gfx.clear();
         this.gfx.resetTransform();
-        this.gfx.drawText(0, 5, this.avgFrameRate().toString(), 5);
+        if (this.shouldShowFps) {
+            this.gfx.drawText(0, 5, this.avgFrameRate().toString(), 5);
+        }
         this.player.draw(this.gfx);
         for (let obstacle of this.obstacles) {
             obstacle.draw(this.gfx);
