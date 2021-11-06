@@ -28,9 +28,14 @@ Polish
 Features
 - [ ] Scale so it is possible to play on smaller screens
 - [x] Skaka skärmen rot+pos
-- [ ] Dolj ormen när död
+- [x] Dolj ormen när död
+- [ ] Stoppa ljud när ormen dör
+- [ ] Musik
 - [ ] Dö utanför spelområdet
 - [ ] Poäng äpplen + scroll
 - [ ] Krabbor eller fiender
 - [ ] Ta bort stenar utanför spelområdet
 - [ ] Rita blodpartiklar när död
+
+Never?
+- [ ] Slower when hurt

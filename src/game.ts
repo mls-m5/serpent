@@ -11,14 +11,16 @@ import { Fruit } from './fruit';
 import { EnergyDrink } from './energy-drink';
 import { TitleScreen } from "./titlescreen";
 import { settings } from "./settings";
+import { Score } from "./score";
 
 
 export class Game {
     private player: Serpent;
     private obstacles: Array<Obstacle> = [];
     private controller: Controller;
-    private particles: Particles;
+    private particles = new Particles();
     private titleScreen = new TitleScreen;
+    private score = new Score;
 
     private scrollAmount = 0;
     private runGameLoop = false;
@@ -34,10 +36,14 @@ export class Game {
         private audio: GameAudio
     ) {
         this.controller = new Controller(document);
-        this.particles = new Particles();
 
         setTimeout(
-            () => this.controller.onKeyPressed(KeyboardKey.SPACE, () => this.runGameLoop ? this.pause() : this.start()),
+            () => this.controller.onKeyPressed(KeyboardKey.SPACE, () => {
+                if (this.player.isDead) {
+                    //
+                }
+                this.runGameLoop ? this.pause() : this.start();
+            }),
             100
         );
         this.controller.onKeyPressed(KeyboardKey.KEY_R, () => location.reload()),
@@ -98,6 +104,7 @@ export class Game {
         }
 
         this.particles.draw(this.gfx);
+        this.score.draw(this.gfx);
     }
 
     private collidePlayerWithStuff() {
@@ -174,6 +181,10 @@ export class Game {
 
         this.collidePlayerWithStuff();
         this.particles.update();
+
+        if (!this.player.isDead) {
+            this.score.addScore(this.player.speed * this.player.speed);
+        }
 
         window.requestAnimationFrame(() => this.update());
     }
