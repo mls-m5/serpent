@@ -59,7 +59,7 @@ export class Game {
         this.runGameLoop = false;
     }
 
-    private spawnRock(y: number = 0) {
+    private spawnRock(y: number = -8) {
         let x = Math.random() * this.width;
         this.obstacles.push(new Rock({ x: x, y: y - this.scrollAmount }, 16));
 
@@ -69,7 +69,7 @@ export class Game {
     private spawnFruit() {
         // Todo: Add width
         const x = Math.random() * this.width;
-        this.obstacles.push(new Fruit({ x, y: -this.scrollAmount }, 16));
+        this.obstacles.push(new Fruit({ x, y: -8 - this.scrollAmount }, 16));
     }
 
     private spawnEnergyDrink() {
@@ -177,6 +177,14 @@ export class Game {
             v.y - margin + this.scrollAmount > settings.height / settings.screenPreScale;
     }
 
+    private updateObstacles() {
+        for (let obstacle of this.obstacles) {
+            if (this.isOutside(obstacle.getPos(), 20)) {
+                obstacle.isDead = true;
+            }
+        }
+    }
+
     public update() {
         if (!this.runGameLoop) {
             return;
@@ -198,6 +206,8 @@ export class Game {
                 this.player.hurt();
             }
         }
+
+        this.updateObstacles();
 
         this.collidePlayerWithStuff();
         this.particles.update();

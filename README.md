@@ -31,10 +31,12 @@ Features
 - [x] Dolj ormen när död
 - [x] Stoppa ljud när ormen dör
 - [ ] Musik
-- [ ] Dö utanför spelområdet
+- [ ] Energidrycks-musik
+- [ ] Skärm som visar text när man har dött
+- [x] Dö utanför spelområdet
 - [x] Poäng äpplen + scroll
 - [ ] Krabbor eller fiender
-- [ ] Ta bort stenar utanför spelområdet
+- [x] Ta bort stenar utanför spelområdet
 - [ ] Rita blodpartiklar när död
 
 Never?
