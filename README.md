@@ -31,7 +31,7 @@ Features
 - [x] Dolj ormen när död
 - [x] Stoppa ljud när ormen dör
 - [x] Musik
-- [ ] Energidrycks-musik
+- [x] Energidrycks-musik
 - [x] Skärm som visar text när man har dött
 - [x] Dö utanför spelområdet
 - [x] Poäng äpplen + scroll

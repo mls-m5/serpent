@@ -14,7 +14,7 @@ export class Rock extends Obstacle {
 
     private rockType: number;
 
-    constructor(pos: Vec2, size: number) {
+    constructor(pos: Vec2, size: number, public isRolling = false) {
         super(pos, size);
         this.rockType = getRandomInt(1, 4);
     }
@@ -30,4 +30,15 @@ export class Rock extends Obstacle {
         }
     }
 
+    public update() {
+        if (this.isDead) {
+            return;
+        }
+
+        if (this.isRolling) {
+            let loc = this.getLocation();
+            loc.y += 1;
+            loc.angle += .1;
+        }
+    }
 }

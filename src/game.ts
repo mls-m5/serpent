@@ -29,6 +29,7 @@ export class Game {
     private runGameLoop = false;
     private hasGameStarted = false;
     private rockColodown = settings.rockCooldown;
+    private rollingRockColodown = settings.rollingRockCooldown;
     private appleCooldown = settings.appleCooldown;
     private energyDrinkCooldown = settings.energyDrinkCooldown;
     private shouldShowFps = false;
@@ -61,11 +62,11 @@ export class Game {
         this.runGameLoop = false;
     }
 
-    private spawnRock(y: number = -8) {
+    private spawnRock(y = -8, isRolling = false) {
         let x = Math.random() * this.width;
-        this.obstacles.push(new Rock({ x: x, y: y - this.scrollAmount }, 16));
+        this.obstacles.push(new Rock({ x: x, y: y - this.scrollAmount }, 16, isRolling));
 
-        console.log("spawning rock");
+        console.log("spawning rock: rolling = ", isRolling);
     }
 
     private spawnFruit() {
@@ -76,7 +77,7 @@ export class Game {
 
     private spawnEnergyDrink() {
         const x = Math.random() * this.width;
-        this.obstacles.push(new EnergyDrink({ x, y: -this.scrollAmount }, 16));
+        this.obstacles.push(new EnergyDrink({ x, y: -8 - this.scrollAmount }, 16));
     }
 
     private setupLevel() {
@@ -157,6 +158,12 @@ export class Game {
             this.rockColodown = settings.rockCooldown;
         }
 
+        this.rollingRockColodown -= 1;
+        if (this.rollingRockColodown < 0) {
+            this.spawnRock(-8, true);
+            this.rollingRockColodown = settings.rollingRockCooldown;
+        }
+
         this.appleCooldown -= 1;
         if (this.appleCooldown < 0) {
             this.spawnFruit();
@@ -189,6 +196,8 @@ export class Game {
             if (this.isOutside(obstacle.getPos(), 20)) {
                 obstacle.isDead = true;
             }
+
+            obstacle.update();
         }
     }
 
