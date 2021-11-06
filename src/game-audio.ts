@@ -16,7 +16,7 @@ export class GameAudio {
         this.Slither = this.loadSound("/assets/slither.wav");
         this.Swallow = this.loadSound("/assets/swallow.wav");
         this.Play = this.loadSound("/assets/sfx/play.mp3");
-        this.Energy = this.loadSound("/assets/energy.mp3");
-        this.Died = this.loadSound("/assets/died.mp3");
+        this.Energy = this.loadSound("/assets/sfx/energy.mp3");
+        this.Died = this.loadSound("/assets/sfx/died.mp3");
     }
 }
