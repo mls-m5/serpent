@@ -58,7 +58,7 @@ export class Serpent {
     }
 
     private checkSelfCollision() {
-        let segmentIndex = this.collideWithBody(this.pos, settings.serpentSize);
+        let segmentIndex = this.collideWithBody(this.pos, this.size);
         if (segmentIndex) {
             this.eatSelf(segmentIndex);
         }
@@ -70,14 +70,18 @@ export class Serpent {
         this.length = this.trailSegments.length - segmentIndex;
     }
 
-
     public hurt() {
         this.length = Math.max(this.length - settings.hitRockDamage, 0);
     }
 
     public buff() {
-        this.length += 10;
-        this.size *= 2.05;
+        this.length += settings.eatAppleHeal;
+        this.size *= 1.05;
+    }
+    public drinkEnergyDrink() {
+        const previousSpeed = this.speed;
+        this.speed *= settings.energyDrinkSpeedBoost;
+        setTimeout(() => this.speed = previousSpeed, settings.energyDrinkLifetime);
     }
 
     public draw(gfx: Gfx) {
@@ -85,14 +89,15 @@ export class Serpent {
 
         for (let i = this.trailSegments.length - 1; i > separation / 2; i -= separation) {
             let segment = this.trailSegments[i];
-            gfx.drawBodySegment(segment);
+            gfx.drawBodySegment(segment, this.size);
         }
         if (this.trailSegments.length) {
             let segment = this.trailSegments[0];
-            gfx.drawTailSegment({ x: segment.x, y: segment.y, angle: segment.angle + Math.PI });
+            gfx.drawTailSegment({ x: segment.x, y: segment.y, angle: segment.angle + Math.PI }, 1);
         }
 
-        gfx.drawHead(this.pos.x, this.pos.y, this.angle);
+        gfx.drawHead(this.pos.x, this.pos.y, this.angle, this.size);
+
 
     }
 
@@ -106,7 +111,7 @@ export class Serpent {
             let segment = this.trailSegments[i];
             let dx = segment.x - v.x;
             let dy = segment.y - v.y;
-            let d = size / 2 + settings.serpentSize / 2;
+            let d = size / 2 + this.size / 2;
             if (dx * dx + dy * dy < d * d) {
                 return i;
             }

@@ -8,7 +8,9 @@ import { Obstacle } from "./obstacle";
 import { Particles } from "./particles";
 import { Rock } from './rock';
 import { Fruit } from './fruit';
+import { EnergyDrink } from './energy-drink';
 import { TitleScreen } from "./titlescreen";
+import { settings } from "./settings";
 
 
 export class Game {
@@ -21,6 +23,11 @@ export class Game {
     private scrollAmount = 0;
     private runGameLoop = false;
     private hasGameStarted = false;
+    private rockColodown = settings.rockCooldown;
+    private appleCooldown = settings.appleCooldown;
+    private energyDrinkCooldown = settings.energyDrinkCooldown;
+
+    private width = 1080 / 4;
 
     constructor(
         private gfx: Gfx,
@@ -41,13 +48,29 @@ export class Game {
         this.runGameLoop = false;
     }
 
+    private spawnRock(y: number = 0) {
+        let x = Math.random() * this.width;
+        this.obstacles.push(new Rock({ x: x, y: y - this.scrollAmount }, 16));
+
+        console.log("spawning rock");
+    }
+
+    private spawnFruit() {
+        // Todo: Add width
+        const x = Math.random() * this.width;
+        this.obstacles.push(new Fruit({ x, y: -this.scrollAmount }, 16));
+    }
+
+    private spawnEnergyDrink() {
+        const x = Math.random() * this.width;
+        this.obstacles.push(new EnergyDrink({ x, y: -this.scrollAmount }, 16));
+    }
+
     private setupLevel() {
-        for (let i = 0; i < 10; ++i) {
-            let x = Math.random() * 200;
-            let y = Math.random() * 200;
-            this.obstacles.push(new Rock({ x: x, y: y }, 16));
+        for (let i = 0; i < 3; ++i) {
+            let y = Math.random() * 20;
+            this.spawnRock(y);
         }
-        this.obstacles.push(new Fruit({ x: 20, y: 0 }, 16));
     }
 
     public start() {
@@ -57,6 +80,10 @@ export class Game {
         this.runGameLoop = true;
         this.hasGameStarted = true;
         this.update();
+    }
+
+    public endGame() {
+
     }
 
     private draw() {
@@ -76,16 +103,45 @@ export class Game {
             if (obstacle.isCollision(this.player.getPos(), this.player.size)) {
                 obstacle.isDead = true;
                 this.particles.explosion(obstacle.getPos());
-                if (obstacle.isFood) {
-                    this.player.buff();
-                    console.log('buff');
-                } else {
-                    this.player.hurt();
-                    console.log('sad');
+
+                switch (obstacle.constructor) {
+                    case EnergyDrink:
+                        this.player.drinkEnergyDrink();
+                        continue;
+                    case Fruit:
+                        this.player.buff();
+                        console.log('buff');
+                        break;
+                    case Rock:
+                        this.player.hurt();
+                        console.log('sad');
+                        break;
+
                 }
             }
         }
         this.obstacles = this.obstacles.filter((obstacle) => !obstacle.isDead);
+    }
+
+    private spawnFromTop() {
+        this.rockColodown -= 1;
+        if (this.rockColodown < 0) {
+            this.spawnRock();
+            this.rockColodown = settings.rockCooldown;
+        }
+
+        this.appleCooldown -= 1;
+        if (this.appleCooldown < 0) {
+            this.spawnFruit();
+            this.appleCooldown = settings.appleCooldown;
+        }
+
+        this.energyDrinkCooldown -= 1;
+        if (this.energyDrinkCooldown < 0) {
+            this.spawnEnergyDrink();
+            this.energyDrinkCooldown = settings.appleCooldown;
+        }
+
     }
 
     public update() {
@@ -94,6 +150,8 @@ export class Game {
         }
         this.scrollAmount += .1;
         this.draw();
+
+        this.spawnFromTop();
 
         this.player.update();
 

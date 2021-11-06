@@ -20,12 +20,12 @@ export class Particles {
     }
 
     public addParicle(v: Vec2, vel: Vec2) {
-        this.particles.push({ x: v.x, y: v.y, vx: vel.x, vy: vel.y, duration: 20 });
+        this.particles.push({ x: v.x, y: v.y, vx: vel.x, vy: vel.y, duration: 20 + Math.random() * 10 });
     }
 
     public explosion(v: Vec2) {
         for (let i = 0; i < 20; ++i) {
-            this.particles.push({ x: v.x, y: v.y, vx: Math.random() - .5, vy: Math.random() - .5, duration: 20 });
+            this.particles.push({ x: v.x, y: v.y, vx: Math.random() - .5, vy: Math.random() - .5, duration: 20 + Math.random() * 10 });
         }
     }
 }

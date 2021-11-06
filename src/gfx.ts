@@ -44,7 +44,7 @@ export class Gfx {
     public resetTransform() {
     }
 
-    public drawSprite(loc: Loc2, sprite: Sprite) {
+    public drawSprite(loc: Loc2, sprite: Sprite, scale = 1) {
         this.ctx.resetTransform();
         this.ctx.scale(8, 8);
         this.ctx.save();
@@ -53,19 +53,20 @@ export class Gfx {
         this.ctx.rotate(loc.angle);
         this.ctx.translate(-sprite.w / 2, -sprite.h / 2);
         this.ctx.scale(1 / 16, 1 / 16);
+        this.ctx.scale(scale, scale)
         this.ctx.drawImage(sprite.image, 0, 0);
         this.ctx.restore();
     }
 
-    public drawHead(x: number, y: number, angle: number) {
+    public drawHead(x: number, y: number, angle: number, scale: number) {
         this.drawSprite({ x: x, y: y, angle: angle }, this.sprites.headSprite);
     }
 
-    public drawTailSegment(loc: Loc2) {
-        this.drawSprite(loc, this.sprites.tailSprite);
+    public drawTailSegment(loc: Loc2, scale: number) {
+        this.drawSprite(loc, this.sprites.tailSprite, scale);
     }
 
-    public drawBodySegment(loc: Loc2) {
+    public drawBodySegment(loc: Loc2, scale: number) {
         this.drawSprite(loc, this.sprites.bodySprite);
     }
 
