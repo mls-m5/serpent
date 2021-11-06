@@ -8,4 +8,5 @@ export const settings = {
     serpentLength: 100,
     serpentSize: 16,
     enableImageSmoothing: true,
+    hitRockDamage: 40,
 };

@@ -9,7 +9,10 @@ export class Serpent {
     private angle: number = Math.PI;
     private trailSegments: Array<Loc2> = [];
 
-    public readonly size = settings.serpentSize;
+    public isDead = false;
+
+    public size = settings.serpentSize;
+    public length = settings.serpentLength;
     public speed = settings.slitherSpeed;
     public turnRate = settings.turnRate;
 
@@ -39,15 +42,19 @@ export class Serpent {
 
         // Todo: Maybe handle in some other way
         this.trailSegments.push({ ... this.pos, angle: this.angle });
-        this.checkSelfCollision();
-
-
-        // Pop the first element
-        for (let i = 0; i < 2; ++i) {
-            if (settings.serpentLength > 0 && this.trailSegments.length > settings.serpentLength) {
-                this.trailSegments.shift();
-            }
+        while (this.length >= this.trailSegments.length) {
+            const { x, y, angle } = this.trailSegments[0];
+            this.trailSegments.unshift({ x, y, angle });
         }
+
+        while (this.trailSegments.length > 0 && this.length < this.trailSegments.length) {
+            const { x, y, angle } = this.trailSegments[0];
+            this.trailSegments.shift();
+        }
+        this.trailSegments.shift();
+
+
+        this.checkSelfCollision();
     }
 
     private checkSelfCollision() {
@@ -60,17 +67,17 @@ export class Serpent {
     private eatSelf(segmentIndex: number) {
         this.audio.Swallow.play();
         this.trailSegments = this.trailSegments.slice(segmentIndex);
-        settings.serpentLength = this.trailSegments.length - segmentIndex;
+        this.length = this.trailSegments.length - segmentIndex;
     }
 
 
     public hurt() {
-        settings.serpentLength -= 50;
+        this.length = Math.max(this.length - settings.hitRockDamage, 0);
     }
 
     public buff() {
-        settings.serpentLength += 5;
-        settings.serpentSize *= 2.05;
+        this.length += 10;
+        this.size *= 2.05;
     }
 
     public draw(gfx: Gfx) {
