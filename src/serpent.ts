@@ -10,6 +10,7 @@ export class Serpent {
     private trailSegments: Array<Loc2> = [];
 
     public isDead = false;
+    private tookDamageThisFrame = 0;
 
     public size = settings.serpentSize;
     public length = settings.serpentLength;
@@ -72,6 +73,7 @@ export class Serpent {
 
     public hurt() {
         this.length = Math.max(this.length - settings.hitRockDamage, 0);
+        this.tookDamageThisFrame = 5;
     }
 
     public eatApple() {
@@ -96,10 +98,14 @@ export class Serpent {
             let segment = this.trailSegments[0];
             gfx.drawTailSegment({ x: segment.x, y: segment.y, angle: segment.angle + Math.PI }, 1);
         }
-
-        gfx.drawHead(this.pos.x, this.pos.y, this.angle, this.size);
-
-
+        if(this.tookDamageThisFrame){
+            gfx.drawWhiteSquare(this.pos.x, this.pos.y, this.angle, this.size);
+            this.tookDamageThisFrame = Math.max(this.tookDamageThisFrame - 1, 0);
+        }else{
+            gfx.drawHead(this.pos.x, this.pos.y, this.angle, this.size);
+        }
+        
+        
     }
 
     public getPos() {

@@ -11,7 +11,7 @@ export class Sprites {
     public orange = this.loadSprite("assets/orange.png", 16, 16);
     public cherry = this.loadSprite("assets/cherry.png", 16, 16);
     public energyDrink = this.loadSprite("assets/energy-drink.png", 16, 16);
-
+    public white = this.loadSprite("assets/white.png", 16, 16);
 
     constructor(private body: HTMLBodyElement) { }
 
