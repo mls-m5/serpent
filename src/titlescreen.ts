@@ -14,6 +14,10 @@ export class TitleScreen {
 
 
         window.onload = () => {
+            gfx.drawSprite({ x: 32, y: 16, angle: -Math.PI / 2 }, gfx.sprites.headSprite);
+            gfx.drawSprite({ x: 48, y: 16, angle: -Math.PI / 2 }, gfx.sprites.bodySprite);
+            gfx.drawSprite({ x: 64, y: 16, angle: -Math.PI / 2 }, gfx.sprites.tailSprite);
+
             gfx.drawSprite({ x: 200, y: 100, angle: 0 }, gfx.sprites.energyDrink);
             gfx.drawSprite({ x: 20, y: 100, angle: 0 }, gfx.sprites.orange);
             gfx.drawSprite({ x: 30, y: 110, angle: 0 }, gfx.sprites.cherry);
