@@ -40,14 +40,14 @@ export class Game {
         setTimeout(
             () => this.controller.onKeyPressed(KeyboardKey.SPACE, () => {
                 if (this.player.isDead) {
-                    //
+                    location.reload();
                 }
                 this.runGameLoop ? this.pause() : this.start();
             }),
             100
         );
         this.controller.onKeyPressed(KeyboardKey.KEY_R, () => location.reload()),
-        this.player = new Serpent({ x: 50, y: 100 }, this.controller, this.audio);
+            this.player = new Serpent({ x: 50, y: 100 }, this.controller, this.audio);
         this.titleScreen.draw(gfx);
     }
 
