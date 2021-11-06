@@ -27,8 +27,7 @@ Polish
 
 Features
 - [ ] Scale so it is possible to play on smaller screens
-- [ ] Skaka skärmen rot+pos
-- [ ] Röd blink när skadad
+- [x] Skaka skärmen rot+pos
 - [ ] Dolj ormen när död
 - [ ] Dö utanför spelområdet
 - [ ] Poäng äpplen + scroll

@@ -25,6 +25,9 @@ export class Serpent {
     }
 
     public update() {
+        if (this.isDead) {
+            return;
+        }
 
         if (this.controller.isKeyPressed(KeyboardKey.LEFT_ARROW)) {
             this.angle -= this.turnRate;
@@ -74,6 +77,9 @@ export class Serpent {
     public hurt() {
         this.length = Math.max(this.length - settings.hitRockDamage, 0);
         this.damageFramesLeft = settings.numVisualDamageFrames;
+        if (this.length == 0) {
+            this.isDead = true;
+        }
     }
 
     public eatApple() {
@@ -88,6 +94,10 @@ export class Serpent {
     }
 
     public draw(gfx: Gfx) {
+        if (this.isDead) {
+            return;
+        }
+
         let separation = settings.segmentSeparationRender(this.speed);
 
         for (let i = this.trailSegments.length - 1; i > separation / 2; i -= separation) {
@@ -98,14 +108,14 @@ export class Serpent {
             let segment = this.trailSegments[0];
             gfx.drawTailSegment({ x: segment.x, y: segment.y, angle: segment.angle + Math.PI }, 1);
         }
-        if(this.damageFramesLeft){
+        if (this.damageFramesLeft) {
             gfx.drawWhiteSquare(this.pos.x, this.pos.y, this.angle, this.size);
             this.damageFramesLeft = Math.max(this.damageFramesLeft - 1, 0);
-        }else{
+        } else {
             gfx.drawHead(this.pos.x, this.pos.y, this.angle, this.size);
         }
-        
-        
+
+
     }
 
     public getPos() {
