@@ -24,4 +24,8 @@ export const settings = {
     frameScoreMultier: .1,
     appleScore: 100,
     energyDrinkScore: 200,
+
+    width: 1920,
+    height: 1080,
+    screenPreScale: 8,
 };

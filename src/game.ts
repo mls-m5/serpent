@@ -30,7 +30,8 @@ export class Game {
     private energyDrinkCooldown = settings.energyDrinkCooldown;
     private shouldShowFps = false;
 
-    private width = 1080 / 4;
+    private width = settings.width / settings.screenPreScale;
+    private height = settings.height / settings.screenPreScale;
 
     constructor(
         private gfx: Gfx,
@@ -159,7 +160,6 @@ export class Game {
             this.spawnEnergyDrink();
             this.energyDrinkCooldown = settings.appleCooldown;
         }
-
     }
     private frameStart = new Date().getTime();
     private frameRates: number[] = [0, 2, 3, 4, 5, 6, 7, 8, 9];
