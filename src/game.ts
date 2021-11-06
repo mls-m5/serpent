@@ -7,6 +7,8 @@ import { GameAudio } from "./game-audio";
 import { Obstacle } from "./obstacle";
 import { Particles } from "./particles";
 import { Rock } from './rock';
+import { Fruit } from './fruit';
+import { TitleScreen } from "./titlescreen";
 
 
 export class Game {
@@ -14,6 +16,7 @@ export class Game {
     private obstacles: Array<Obstacle> = [];
     private controller: Controller;
     private particles: Particles;
+    private titleScreen = new TitleScreen;
 
     private scrollAmount = 0;
     private runGameLoop = false;
@@ -31,6 +34,7 @@ export class Game {
             100
         );
         this.player = new Serpent({ x: 50, y: 100 }, this.controller, this.audio);
+        this.titleScreen.draw(gfx);
     }
 
     public pause() {
@@ -43,6 +47,7 @@ export class Game {
             let y = Math.random() * 200;
             this.obstacles.push(new Rock({ x: x, y: y }, 16));
         }
+        this.obstacles.push(new Fruit({ x: 20, y: 0 }, 16));
     }
 
     public start() {
@@ -71,8 +76,12 @@ export class Game {
             if (obstacle.isCollision(this.player.getPos(), this.player.size)) {
                 obstacle.isDead = true;
                 this.particles.explosion(obstacle.getPos());
-                if (!obstacle.isFood) {
+                if (obstacle.isFood) {
+                    this.player.buff();
+                    console.log('buff');
+                } else {
                     this.player.hurt();
+                    console.log('sad');
                 }
             }
         }

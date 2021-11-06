@@ -10,11 +10,11 @@ function getRandomInt(min: number, max: number) {
 }
 
 export class Rock extends Obstacle {
-    public isFood = false;
+    public readonly isFood = false;
 
     private rockType: number;
 
-    constructor(private pos: Vec2, private size: number) {
+    constructor(pos: Vec2, size: number) {
         super(pos, size);
         this.rockType = getRandomInt(1, 4);
     }

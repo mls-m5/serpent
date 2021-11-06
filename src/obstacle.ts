@@ -6,7 +6,7 @@ import { Vec2 } from "./vec2";
 
 
 export abstract class Obstacle {
-    public abstract isFood: boolean;
+    public abstract readonly isFood: boolean;
     public isDead = false;
 
     constructor(private pos: Vec2, private size: number) {

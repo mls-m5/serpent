@@ -10,6 +10,8 @@ export class Serpent {
     private trailSegments: Array<Loc2> = [];
 
     public readonly size = settings.serpentSize;
+    public speed = settings.slitherSpeed;
+    public turnRate = settings.turnRate;
 
     constructor(
         private pos: Vec2,
@@ -19,13 +21,12 @@ export class Serpent {
     }
 
     public update() {
-        let speed = settings.slitherSpeed;
-        let turnRate = settings.turnRate;
+
         if (this.controller.isKeyPressed(KeyboardKey.LEFT_ARROW)) {
-            this.angle -= turnRate;
+            this.angle -= this.turnRate;
         }
         if (this.controller.isKeyPressed(KeyboardKey.RIGHT_ARROW)) {
-            this.angle += turnRate;
+            this.angle += this.turnRate;
         }
 
         if (this.audio.Slither.paused) {
@@ -33,8 +34,8 @@ export class Serpent {
             this.audio.Slither.play();
         }
 
-        this.pos.x += Math.sin(-this.angle) * speed;
-        this.pos.y += Math.cos(-this.angle) * speed;
+        this.pos.x += Math.sin(-this.angle) * this.speed;
+        this.pos.y += Math.cos(-this.angle) * this.speed;
 
         // Todo: Maybe handle in some other way
         this.trailSegments.push({ ... this.pos, angle: this.angle });
@@ -62,13 +63,14 @@ export class Serpent {
         settings.serpentLength = this.trailSegments.length - segmentIndex;
     }
 
-    private shopOfEnd(amount: number) {
-        this.trailSegments = this.trailSegments.slice(this.trailSegments.length - amount);
-        settings.serpentLength -= amount;
-    }
 
     public hurt() {
-        this.shopOfEnd(100);
+        settings.serpentLength -= 50;
+    }
+
+    public buff() {
+        settings.serpentLength += 5;
+        settings.serpentSize *= 2.05;
     }
 
     public draw(gfx: Gfx) {
@@ -78,12 +80,9 @@ export class Serpent {
             let segment = this.trailSegments[i];
             gfx.drawBodySegment(segment);
         }
-
-        {
-            if (this.trailSegments.length) {
-                let segment = this.trailSegments[0];
-                gfx.drawTailSegment({ x: segment.x, y: segment.y, angle: segment.angle + Math.PI });
-            }
+        if (this.trailSegments.length) {
+            let segment = this.trailSegments[0];
+            gfx.drawTailSegment({ x: segment.x, y: segment.y, angle: segment.angle + Math.PI });
         }
 
         gfx.drawHead(this.pos.x, this.pos.y, this.angle);

@@ -75,6 +75,15 @@ export class Gfx {
         }
     }
 
+    public drawText(x: number, y: number, text: string, size: number, hasBorders = false) {
+        this.ctx.font = size + 'px sans';
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText(text, x, y);
+        if (hasBorders) {
+            this.ctx.strokeText(text, x, y);
+        }
+    }
+
     public clear() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
