@@ -40,6 +40,7 @@ export class Game {
             () => this.controller.onKeyPressed(KeyboardKey.SPACE, () => this.runGameLoop ? this.pause() : this.start()),
             100
         );
+        this.controller.onKeyPressed(KeyboardKey.KEY_R, () => location.reload()),
         this.player = new Serpent({ x: 50, y: 100 }, this.controller, this.audio);
         this.titleScreen.draw(gfx);
     }
