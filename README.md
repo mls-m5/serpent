@@ -29,7 +29,7 @@ Features
 - [ ] Scale so it is possible to play on smaller screens
 - [x] Skaka skärmen rot+pos
 - [x] Dolj ormen när död
-- [ ] Stoppa ljud när ormen dör
+- [x] Stoppa ljud när ormen dör
 - [ ] Musik
 - [ ] Dö utanför spelområdet
 - [x] Poäng äpplen + scroll
