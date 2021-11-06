@@ -200,7 +200,12 @@ export class Game {
         this.frameRates.push(1000 / deltaTime);
         this.frameRates.shift();
         this.frameStart = new Date().getTime();
-        this.scrollAmount += .1;
+        if (!this.player.isDead) {
+            this.scrollAmount += .1;
+        }
+        else {
+            this.scrollAmount += .02;
+        }
         this.gfx.update();
         this.draw();
 

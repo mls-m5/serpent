@@ -123,4 +123,9 @@ export class Gfx {
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.globalAlpha = 1;
     }
+
+    public drawStripe(x: number, len: number) {
+        this.ctx.fillStyle = "rgb(255,30,30)";
+        this.ctx.fillRect(x, 0, 1, len);
+    }
 }
