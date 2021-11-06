@@ -20,7 +20,7 @@ export class TitleScreen {
 
             gfx.drawSprite({ x: 200, y: 100, angle: 0 }, gfx.sprites.energyDrink);
             gfx.drawSprite({ x: 20, y: 100, angle: 0 }, gfx.sprites.orange);
-            gfx.drawSprite({ x: 30, y: 110, angle: 0 }, gfx.sprites.cherry);
+            gfx.drawSprite({ x: 30, y: 115, angle: 0 }, gfx.sprites.cherry);
             gfx.drawSprite({ x: 40, y: 100, angle: 0 }, gfx.sprites.apple);
 
             gfx.drawSprite({ x: 100, y: 120, angle: 0 }, gfx.sprites.rock1);
