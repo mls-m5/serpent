@@ -1,4 +1,4 @@
-
+# A simple serpent
 
 
 # How to run:
@@ -17,7 +17,15 @@ npx http-server -c-1 ./out
 
 Visit http://localhost:8080 in your favoite browser!
 
-# TODO
+## Alternative build (linux)
+
+Install g++ or similar compiler
+
+```
+make
+```
+
+## TODO
 
 Polish
 - [ ] When you die, start from an egg.
