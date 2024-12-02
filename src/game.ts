@@ -1,14 +1,14 @@
 
 import { Gfx } from "./gfx";
 import { Serpent } from "./serpent";
-import { Controller } from './controller';
-import { KeyboardKey } from './keyboard-key';
+import { Controller } from "./controller";
+import { KeyboardKey } from "./keyboard-key";
 import { GameAudio } from "./game-audio";
 import { Obstacle } from "./obstacle";
 import { Particles } from "./particles";
-import { Rock } from './rock';
-import { Fruit } from './fruit';
-import { EnergyDrink } from './energy-drink';
+import { Rock } from "./rock";
+import { Fruit } from "./fruit";
+import { EnergyDrink } from "./energy-drink";
 import { TitleScreen } from "./titlescreen";
 import { settings } from "./settings";
 import { Score } from "./score";

@@ -1,7 +1,7 @@
 
 import { Gfx } from "./gfx";
 import { Game } from "./game";
-import { GameAudio } from './game-audio';
+import { GameAudio } from "./game-audio";
 
 document.bgColor = '#424242';
 document.body.style.margin = '0';

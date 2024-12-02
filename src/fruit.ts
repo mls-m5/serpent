@@ -1,6 +1,6 @@
-import { Obstacle } from './obstacle';
-import { Sprites } from './sprites';
-import { Vec2 } from './vec2';
+import { Obstacle } from "./obstacle";
+import { Sprites } from "./sprites";
+import { Vec2 } from "./vec2";
 
 function getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
